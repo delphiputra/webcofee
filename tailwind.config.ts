@@ -9,10 +9,27 @@ export default {
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        textPrimary: "#4A90E2", // Warna biru untuk tulisan utama
+        textSecondary: "#4A90E2", // Warna abu-abu untuk tulisan sekunder
+      },
+    },
+  },
+  
+  plugins: [],
+} satisfies Config;
+
+module.exports = {
+  content: ["./app/**/*.{js,ts,jsx,tsx}"],
+  theme: {
+    extend: {
+      colors: {
+        brown: {
+          700: "#6B4226",
+          800: "#5A3720",
+        },
       },
     },
   },
   plugins: [],
-} satisfies Config;
+};
+

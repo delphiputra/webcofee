@@ -1,0 +1,54 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model user {
+  id       Int      @id @default(autoincrement())
+  name     String
+  email    String   @unique
+  role     String
+  password String
+
+  // Relasi ke pesanan
+  pesanan  pesanan[]
+}
+
+model makanan {
+  id    Int     @id @default(autoincrement())
+  name  String
+  price Float
+
+  // Relasi ke pesanan
+  pesanan pesanan[]
+}
+
+model minuman {
+  id    Int     @id @default(autoincrement())
+  name  String
+  price Float
+
+  // Relasi ke pesanan
+  pesanan pesanan[]
+}
+
+model pesanan {
+  id          Int       @id @default(autoincrement())
+  userId      Int
+  makananId   Int
+  minumanId   Int
+  createdAt   DateTime  @default(now())
+
+  // Relasi ke tabel user
+  user        user      @relation(fields: [userId], references: [id])
+
+  // Relasi ke tabel makanan
+  makanan     makanan   @relation(fields: [makananId], references: [id])
+
+  // Relasi ke tabel minuman
+  minuman     minuman   @relation(fields: [minumanId], references: [id])
+}
